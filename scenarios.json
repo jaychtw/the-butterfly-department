@@ -1,6 +1,9 @@
 {
-  "version": 1,
-  "immutableWeather": { "rainDays": [0, 2], "interactionTime": "07:45" },
+  "version": 2,
+  "immutableWeather": {
+    "rainDays": [0, 2],
+    "interactionTime": "07:45"
+  },
   "initialConditions": "src/core.js initial(); version 1; fixed identities, graph, facts, energy and Friday conflicts",
   "witnesses": [
     {
@@ -57,9 +60,21 @@
     }
   ],
   "counterExamples": [
-    { "scenario": 0, "choices": [], "expectedWin": false },
-    { "scenario": 1, "choices": [], "expectedWin": false },
-    { "scenario": 2, "choices": [], "expectedWin": false },
+    {
+      "scenario": 0,
+      "choices": [],
+      "expectedWin": false
+    },
+    {
+      "scenario": 1,
+      "choices": [],
+      "expectedWin": false
+    },
+    {
+      "scenario": 2,
+      "choices": [],
+      "expectedWin": false
+    },
     {
       "scenario": 1,
       "choices": ["exhibit", "repair"],
@@ -71,6 +86,10 @@
       "choices": ["nothing", "gathering-park"],
       "expectedWin": false
     },
-    { "scenario": 2, "choices": ["gathering-hall"], "expectedWin": false }
+    {
+      "scenario": 2,
+      "choices": ["gathering-hall"],
+      "expectedWin": false
+    }
   ]
 }

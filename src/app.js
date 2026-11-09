@@ -152,15 +152,21 @@ function outcomes(s) {
       "conversation",
       "attend",
       "ride",
+      "appointment",
       "consultation",
       "alternative",
       "bakery-closed",
       "bakery-open",
     ].includes(e.type),
   );
+  const outcomes = ev.filter(
+    (e, i) =>
+      !["ride", "appointment"].includes(e.type) ||
+      !ev.slice(i + 1).some((x) => x.type === e.type),
+  );
   return `<ul class="outcomes">${
-    ev
-      .slice(-8)
+    outcomes
+      .slice(-10)
       .map((e) => `<li>${esc(eventText(e))}</li>`)
       .join("") || `<li>${t.empty}</li>`
   }</ul>`;
@@ -313,7 +319,7 @@ function renderModal() {
       Elias:
         "09:00–11:00 · Workshop / 11:00–12:00 · Park / 15:00–16:00 · Library",
       Ada: "09:00–17:00 · Library / 17:00–18:00 · Park",
-      Nora: "07:30–08:00 · Bus / 12:00–13:00 · Hall",
+      Nora: "07:30–08:00 · Bus / 08:05–08:15, 12:00–13:00 · Hall",
       Theo: "08:00–12:00 · Park / 13:00–14:00 · Bakery",
       Iris: "08:00–09:00 · Bus / 16:00–17:00 · Library",
       Felix: "07:00–09:00, 16:00–18:00 · Bus / 12:00–13:00 · Hall",

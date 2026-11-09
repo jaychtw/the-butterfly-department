@@ -1,5 +1,5 @@
 // Pure deterministic simulation. Creative strings are rights reserved.
-export const VERSION = 1;
+export const VERSION = 2;
 export const NODES = ["Bakery", "Bus", "Hall", "Library", "Park", "Workshop"];
 export const EDGES = [
   ["Bakery", "Bus"],
@@ -299,6 +299,17 @@ export function tick(s) {
       a.commitments = [];
     }
     if (a.busy > s.tick) continue;
+    if (a.busTrip) {
+      if (a.node !== "Hall") {
+        move(s, a, "Hall", a.busTrip);
+        continue;
+      }
+      a.busTrip = null;
+      if (id === "Nora") {
+        a.busy = at(8, 15);
+        continue;
+      }
+    }
     const notice = s.notices.find(
       (n) => n.node === a.node && n.expires >= s.day && !a.facts[n.fact],
     );
@@ -397,13 +408,36 @@ export function tick(s) {
       node: "Bus",
       departure: clock(s.tick),
     });
+    s.busDeparture = ride;
+    s.actors.Felix.busTrip = ride;
+    move(s, s.actors.Felix, "Hall", ride);
     if (n.node === "Bus" && n.busy <= s.tick) {
-      n.facts.ride = emit(s, "ride", ["Nora"], { appointment: true }, [
+      n.facts.ride = emit(s, "ride", ["Nora"], { destination: "Hall" }, [
         ride,
         n.lastArrival,
       ]);
-    } else missed(s, "Nora", "appointment", [ride, n.umbrella]);
+      n.busTrip = n.facts.ride;
+      move(s, n, "Hall", n.facts.ride);
+    }
   }
+  // A private 08:05 appointment never shifts with the public departure.
+  if (s.tick === at(8, 5)) {
+    const n = s.actors.Nora;
+    if (
+      n.node === "Hall" &&
+      n.facts.ride &&
+      s.events.find((e) => e.id === n.facts.ride)?.day === s.day
+    ) {
+      n.facts.appointment = emit(
+        s,
+        "appointment",
+        ["Nora"],
+        { node: "Hall", deadline: "08:05" },
+        [n.facts.ride, n.lastArrival],
+      );
+    } else missed(s, "Nora", "appointment", [s.busDeparture, n.umbrella]);
+  }
+
   // The public bench adds a five-minute reading/rest affordance, not a teleport.
   if (s.tick === at(12, 30)) {
     for (const id of IDS) {
