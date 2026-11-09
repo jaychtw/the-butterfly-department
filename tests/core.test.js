@@ -193,3 +193,10 @@ test("bus boarding is not appointment arrival: trip uses real edges and fixed de
       );
   }
 });
+
+test("a shifted departure records its intervention as an enabling dependency", () => {
+  const s = run(0, ["delay"]);
+  const choice = s.events.find((e) => e.type === "intervention");
+  const departure = s.events.find((e) => e.type === "bus-depart");
+  assert.ok(departure.deps.includes(choice.id));
+});

@@ -87,6 +87,7 @@ export function initial(scenario = 0) {
     umbrella: "Park",
     umbrellaTaken: false,
     busDelay: 0,
+    busDelaySource: null,
     trust: 0,
     talks: [],
     commitments: [],
@@ -187,6 +188,7 @@ export function choose(s, id) {
   if (id === "umbrella") s.umbrella = o.node;
   if (id === "delay") s.busDelay = 3;
   if (id === "early-bus") s.busDelay = -3;
+  if (o.category === "delay") s.busDelaySource = source;
   if (id === "bench") {
     s.bench = o.node;
     s.benchSource = source;
@@ -404,10 +406,16 @@ export function tick(s) {
   // A shifted authorised bus departure is visible and changes the punctuality result.
   if (s.tick === at(7, 45) + s.busDelay) {
     const n = s.actors.Nora;
-    const ride = emit(s, "bus-depart", ["Felix"], {
-      node: "Bus",
-      departure: clock(s.tick),
-    });
+    const ride = emit(
+      s,
+      "bus-depart",
+      ["Felix"],
+      {
+        node: "Bus",
+        departure: clock(s.tick),
+      },
+      [s.busDelaySource],
+    );
     s.busDeparture = ride;
     s.actors.Felix.busTrip = ride;
     move(s, s.actors.Felix, "Hall", ride);
@@ -627,6 +635,7 @@ export function nextDay(s) {
   s.tick = 0;
   s.phase = "morning";
   s.busDelay = 0;
+  s.busDelaySource = null;
   for (const a of Object.values(s.actors)) {
     a.busy = 0;
     a.overlap = {};
