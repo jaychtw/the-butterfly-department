@@ -157,3 +157,46 @@ test("import rejects executable attribute-shaped branch identifiers", () => {
   };
   assert.throws(() => unpack(pack(d)));
 });
+
+test("bus boarding is not appointment arrival: trip uses real edges and fixed deadline", () => {
+  for (const [choice, success] of [
+    ["nothing", true],
+    ["umbrella", false],
+    ["delay", false],
+    ["early-bus", false],
+  ]) {
+    const s = run(0, [choice]);
+    const day = s.events.filter((e) => e.day === 0);
+    assert.equal(
+      day.some((e) => e.type === "appointment"),
+      success,
+      choice,
+    );
+    if (success) {
+      const ride = day.find((e) => e.type === "ride"),
+        arrival = day.find((e) => e.type === "appointment");
+      assert.ok(arrival.tick > ride.tick);
+      assert.ok(
+        day.some(
+          (e) =>
+            e.type === "arrive" &&
+            e.actors.includes("Nora") &&
+            e.data.node === "Hall" &&
+            e.tick <= arrival.tick,
+        ),
+      );
+    } else
+      assert.ok(
+        day.some(
+          (e) => e.type === "missed" && e.data.opportunity === "appointment",
+        ),
+      );
+  }
+});
+
+test("a shifted departure records its intervention as an enabling dependency", () => {
+  const s = run(0, ["delay"]);
+  const choice = s.events.find((e) => e.type === "intervention");
+  const departure = s.events.find((e) => e.type === "bus-depart");
+  assert.ok(departure.deps.includes(choice.id));
+});

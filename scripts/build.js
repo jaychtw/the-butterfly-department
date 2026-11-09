@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile, readFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 await rm("dist", { recursive: true, force: true });
 await mkdir("dist/the-butterfly-department", { recursive: true });
@@ -10,7 +10,7 @@ await writeFile(
     commit: execFileSync("git", ["rev-parse", "HEAD"], {
       encoding: "utf8",
     }).trim(),
-    version: "1.0.0",
+    version: JSON.parse(await readFile("package.json", "utf8")).version,
   }),
 );
 console.log(

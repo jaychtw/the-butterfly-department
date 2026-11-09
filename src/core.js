@@ -1,5 +1,5 @@
 // Pure deterministic simulation. Creative strings are rights reserved.
-export const VERSION = 1;
+export const VERSION = 2;
 export const NODES = ["Bakery", "Bus", "Hall", "Library", "Park", "Workshop"];
 export const EDGES = [
   ["Bakery", "Bus"],
@@ -87,6 +87,7 @@ export function initial(scenario = 0) {
     umbrella: "Park",
     umbrellaTaken: false,
     busDelay: 0,
+    busDelaySource: null,
     trust: 0,
     talks: [],
     commitments: [],
@@ -187,6 +188,7 @@ export function choose(s, id) {
   if (id === "umbrella") s.umbrella = o.node;
   if (id === "delay") s.busDelay = 3;
   if (id === "early-bus") s.busDelay = -3;
+  if (o.category === "delay") s.busDelaySource = source;
   if (id === "bench") {
     s.bench = o.node;
     s.benchSource = source;
@@ -299,6 +301,17 @@ export function tick(s) {
       a.commitments = [];
     }
     if (a.busy > s.tick) continue;
+    if (a.busTrip) {
+      if (a.node !== "Hall") {
+        move(s, a, "Hall", a.busTrip);
+        continue;
+      }
+      a.busTrip = null;
+      if (id === "Nora") {
+        a.busy = at(8, 15);
+        continue;
+      }
+    }
     const notice = s.notices.find(
       (n) => n.node === a.node && n.expires >= s.day && !a.facts[n.fact],
     );
@@ -393,17 +406,46 @@ export function tick(s) {
   // A shifted authorised bus departure is visible and changes the punctuality result.
   if (s.tick === at(7, 45) + s.busDelay) {
     const n = s.actors.Nora;
-    const ride = emit(s, "bus-depart", ["Felix"], {
-      node: "Bus",
-      departure: clock(s.tick),
-    });
+    const ride = emit(
+      s,
+      "bus-depart",
+      ["Felix"],
+      {
+        node: "Bus",
+        departure: clock(s.tick),
+      },
+      [s.busDelaySource],
+    );
+    s.busDeparture = ride;
+    s.actors.Felix.busTrip = ride;
+    move(s, s.actors.Felix, "Hall", ride);
     if (n.node === "Bus" && n.busy <= s.tick) {
-      n.facts.ride = emit(s, "ride", ["Nora"], { appointment: true }, [
+      n.facts.ride = emit(s, "ride", ["Nora"], { destination: "Hall" }, [
         ride,
         n.lastArrival,
       ]);
-    } else missed(s, "Nora", "appointment", [ride, n.umbrella]);
+      n.busTrip = n.facts.ride;
+      move(s, n, "Hall", n.facts.ride);
+    }
   }
+  // A private 08:05 appointment never shifts with the public departure.
+  if (s.tick === at(8, 5)) {
+    const n = s.actors.Nora;
+    if (
+      n.node === "Hall" &&
+      n.facts.ride &&
+      s.events.find((e) => e.id === n.facts.ride)?.day === s.day
+    ) {
+      n.facts.appointment = emit(
+        s,
+        "appointment",
+        ["Nora"],
+        { node: "Hall", deadline: "08:05" },
+        [n.facts.ride, n.lastArrival],
+      );
+    } else missed(s, "Nora", "appointment", [s.busDeparture, n.umbrella]);
+  }
+
   // The public bench adds a five-minute reading/rest affordance, not a teleport.
   if (s.tick === at(12, 30)) {
     for (const id of IDS) {
@@ -593,6 +635,7 @@ export function nextDay(s) {
   s.tick = 0;
   s.phase = "morning";
   s.busDelay = 0;
+  s.busDelaySource = null;
   for (const a of Object.values(s.actors)) {
     a.busy = 0;
     a.overlap = {};

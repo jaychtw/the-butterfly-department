@@ -57,3 +57,16 @@ is sealed at fork. Exported tips preserve the full event log. No implicit tip
 eviction occurs. Settings and progress live only in browser storage; denied
 storage retains session play and manual export. Language and sound settings
 are outside the canonical simulation; sound always starts muted.
+
+### Commute correction (1.0.1 / simulation schema 2)
+
+Boarding a bus is distinct from reaching a private appointment. Nora and Felix
+traverse Bus–Workshop–Hall using the same five-minute graph edges as every
+other resident. Nora must actually reach Hall by the fixed 08:05 appointment;
+Felix returns along the graph to his Bus anchor. The +15-minute departure can
+therefore cause a real missed appointment. The umbrella's five-minute pause
+and the early departure can miss boarding. Their event dependencies distinguish
+boarding, travel, arrival and appointment attendance. Old schema-1 saves are
+rejected with the existing recovery/export choice; no unsupported migration is
+claimed. The first build's faulty appointment label was caught in final causal
+review before independent portfolio publication.
