@@ -152,6 +152,8 @@ function outcomes(s) {
       "conversation",
       "attend",
       "ride",
+      "consultation",
+      "alternative",
       "bakery-closed",
       "bakery-open",
     ].includes(e.type),
@@ -166,14 +168,16 @@ function outcomes(s) {
 function recent() {
   const s = state();
   if (!$("#recent") || !s) return;
-  $("#recent").innerHTML = `<h3>${tr().chronology}</h3>${s.events
-    .slice(-5)
-    .reverse()
-    .map(
-      (e) =>
-        `<p class="event"><small>${stamp(e)}</small>${esc(eventText(e))}</p>`,
-    )
-    .join("")}`;
+  const expanded = $("#recent-detail")?.open ?? true;
+  $("#recent").innerHTML =
+    `<details id="recent-detail" ${expanded ? "open" : ""}><summary>${tr().chronology}</summary>${s.events
+      .slice(-5)
+      .reverse()
+      .map(
+        (e) =>
+          `<p class="event"><small>${stamp(e)}</small>${esc(eventText(e))}</p>`,
+      )
+      .join("")}</details>`;
 }
 function position(a) {
   if (!a.edge) return POS[a.node];

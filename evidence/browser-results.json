@@ -68,6 +68,10 @@
     "status": "PASS"
   },
   {
+    "check": "live encounter metrics match engine",
+    "status": "PASS"
+  },
+  {
     "check": "Assignment II ordinary UI win",
     "status": "PASS"
   },
