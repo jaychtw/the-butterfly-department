@@ -147,3 +147,9 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Local browser test scratch; evidence receipts and curated captures are tracked.
+evidence/browser-save.json
+evidence/invalid-save.json
+evidence/recordings/
+.venv/

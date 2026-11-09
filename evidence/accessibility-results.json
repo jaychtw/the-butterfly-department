@@ -1,0 +1,50 @@
+[
+  {
+    "screen": "title",
+    "viewport": [
+      1440,
+      900
+    ],
+    "violations": []
+  },
+  {
+    "screen": "morning",
+    "viewport": [
+      1440,
+      900
+    ],
+    "violations": []
+  },
+  {
+    "screen": "archive",
+    "viewport": [
+      1440,
+      900
+    ],
+    "violations": []
+  },
+  {
+    "screen": "title",
+    "viewport": [
+      390,
+      844
+    ],
+    "violations": []
+  },
+  {
+    "screen": "morning",
+    "viewport": [
+      390,
+      844
+    ],
+    "violations": []
+  },
+  {
+    "screen": "archive",
+    "viewport": [
+      390,
+      844
+    ],
+    "violations": []
+  }
+]

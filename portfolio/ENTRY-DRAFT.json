@@ -1,0 +1,31 @@
+{
+  "id": "the-butterfly-department",
+  "category": "games",
+  "title": "The Butterfly Department",
+  "summary": "Move one small thing a day. Watch eight independent lives change. Trace the consequences, rewind time, and discover what might have happened otherwise.",
+  "summaryZhTW": "每天只改變一件微不足道的小事，看八位居民的生活如何悄悄轉變。追查因果、倒轉時間，探索另一種可能。",
+  "coverAlt": "Original painted editorial-style illustration of Bellwether's bakery, park, library, noticeboard and bus stop, with residents crossing paths beneath the title The Butterfly Department.",
+  "status": "draft",
+  "maturity": "evolving",
+  "featured": false,
+  "order": 260,
+  "publishedAt": null,
+  "destination": {
+    "action": "play",
+    "url": "https://jaychtw.github.io/the-butterfly-department/"
+  },
+  "repositoryUrl": "https://github.com/jaychtw/the-butterfly-department",
+  "languages": ["en", "zh-TW"],
+  "controls": "To be verified from actual game build before catalog publication.",
+  "limitations": "To be updated from actual release evidence; no claim of full NPC AI or actual human-device testing.",
+  "approval": {
+    "url": null,
+    "note": "2026-11-09 owner Design Freeze preauthorized independent Possibility Games publication using exact approved cover, only after verified game release."
+  },
+  "release": {
+    "version": null,
+    "commit": null
+  },
+  "thumbnail": null,
+  "tags": ["Strategy"]
+}

@@ -1,0 +1,29 @@
+{
+  "status": "owner-approved cover artwork in conversation",
+  "source": "ChatGPT image generation, approved by owner",
+  "source_dimensions": [
+    1672,
+    941
+  ],
+  "native_aspect_ratio": "1672:941 (approximate 16:9)",
+  "usage": [
+    "Possibility Games card",
+    "Title screen background"
+  ],
+  "title_text": "The Butterfly Department",
+  "handling": "Use master pixels as-is. For 1920x1080 display, scale with CSS contain and adapt background; do not pretend to have native FHD pixels. WebP is a derivative of master, not a new illustration. Preserve title within frame.",
+  "files": {
+    "title-screen-master.png": {
+      "bytes": 3558524,
+      "sha256": "52959c6c95ed6051791a42b746b1d71de58bce39e2cda138ce1097334c108411"
+    },
+    "approved-cover-master.png": {
+      "bytes": 3558524,
+      "sha256": "52959c6c95ed6051791a42b746b1d71de58bce39e2cda138ce1097334c108411"
+    },
+    "possibility-cover.webp": {
+      "bytes": 843576,
+      "sha256": "d06a8435202b49657c834cad058df488bf297efafb3fa64f15d62fd352052c95"
+    }
+  }
+}

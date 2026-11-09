@@ -1,0 +1,163 @@
+[
+  {
+    "check": "keyboard START requests fullscreen and reaches picker",
+    "status": "PASS"
+  },
+  {
+    "check": "real fullscreen allowed",
+    "status": "PASS"
+  },
+  {
+    "check": "instant language switch preserves core",
+    "status": "PASS"
+  },
+  {
+    "check": "Traditional Chinese morning UI",
+    "status": "PASS"
+  },
+  {
+    "check": "pause holds simulation",
+    "status": "PASS"
+  },
+  {
+    "check": "blur handler pauses simulation",
+    "status": "PASS"
+  },
+  {
+    "check": "hidden-state handler pauses simulation",
+    "status": "PASS"
+  },
+  {
+    "check": "inspector freezes simulation",
+    "status": "PASS"
+  },
+  {
+    "check": "midday reload restores exact state",
+    "status": "PASS"
+  },
+  {
+    "check": "residents traverse a real edge",
+    "status": "PASS"
+  },
+  {
+    "check": "repair visible with real opportunity cost",
+    "status": "PASS"
+  },
+  {
+    "check": "Assignment I ordinary UI win",
+    "status": "PASS"
+  },
+  {
+    "check": "Assignment I UI fail path",
+    "status": "PASS"
+  },
+  {
+    "check": "parent history immutable",
+    "status": "PASS"
+  },
+  {
+    "check": "causal archive exposes actual source links",
+    "status": "PASS"
+  },
+  {
+    "check": "parallel comparison exposes eight residents",
+    "status": "PASS"
+  },
+  {
+    "check": "counterfactual explicitly labeled",
+    "status": "PASS"
+  },
+  {
+    "check": "live encounter metrics match engine",
+    "status": "PASS"
+  },
+  {
+    "check": "Assignment II ordinary UI win",
+    "status": "PASS"
+  },
+  {
+    "check": "Assignment III ordinary UI win and attendance",
+    "status": "PASS"
+  },
+  {
+    "check": "Open Desk unlock",
+    "status": "PASS"
+  },
+  {
+    "check": "Open Desk has no win score",
+    "status": "PASS"
+  },
+  {
+    "check": "export/import round trip",
+    "status": "PASS"
+  },
+  {
+    "check": "corrupt import preserves progress",
+    "status": "PASS"
+  },
+  {
+    "check": "branch cap prevents silent eviction",
+    "status": "PASS"
+  },
+  {
+    "check": "no unhandled browser errors",
+    "status": "PASS"
+  },
+  {
+    "check": "no external runtime requests",
+    "status": "PASS"
+  },
+  {
+    "check": "desktop layout fits viewport",
+    "status": "PASS"
+  },
+  {
+    "check": "touch START survives fullscreen denial",
+    "status": "PASS"
+  },
+  {
+    "check": "blocked storage session play reaches repair",
+    "status": "PASS"
+  },
+  {
+    "check": "phone portrait has no horizontal overflow",
+    "status": "PASS"
+  },
+  {
+    "check": "touch landscape preserves state",
+    "status": "PASS"
+  },
+  {
+    "check": "Chinese archive localized",
+    "status": "PASS"
+  },
+  {
+    "check": "reduced motion suppresses decorative animation",
+    "status": "PASS"
+  },
+  {
+    "check": "all visible buttons have accessible text",
+    "status": "PASS"
+  },
+  {
+    "check": "controls have 44px practical height",
+    "status": "PASS"
+  },
+  {
+    "check": "sound defaults muted",
+    "status": "PASS"
+  },
+  {
+    "check": "denied audio stays muted",
+    "status": "PASS"
+  },
+  {
+    "check": "alternative browser engine",
+    "status": "NOT VERIFIED",
+    "reason": "BrowserType.launch: Executable doesn't exist at /workspace/scratch/playwright/firefox-1538/firefox/firefox"
+  },
+  {
+    "check": "damaged storage offers recovery without reset",
+    "status": "PASS"
+  }
+]

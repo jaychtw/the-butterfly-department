@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "immutableWeather": { "rainDays": [0, 2], "interactionTime": "07:45" },
+  "initialConditions": "src/core.js initial(); version 1; fixed identities, graph, facts, energy and Friday conflicts",
+  "witnesses": [
+    {
+      "scenario": 0,
+      "choices": ["repair", "nothing", "nothing"],
+      "expectedWin": true,
+      "chain": [
+        "intervention",
+        "read",
+        "repair-accepted",
+        "depart",
+        "arrive",
+        "repair-start",
+        "repair-complete",
+        "bakery-open"
+      ],
+      "cost": "Theo misses a clock consultation while Elias repairs the oven"
+    },
+    {
+      "scenario": 1,
+      "choices": ["exhibit", "nothing", "nothing", "nothing"],
+      "expectedWin": true,
+      "chain": [
+        "intervention",
+        "read",
+        "depart",
+        "arrive",
+        "conversation",
+        "conversation"
+      ],
+      "expectedTrust": 2
+    },
+    {
+      "scenario": 2,
+      "choices": [
+        "gathering-hall",
+        "gathering-park",
+        "nothing",
+        "nothing",
+        "nothing"
+      ],
+      "expectedWin": true,
+      "necessaryDays": [0, 1],
+      "attendees": ["Felix", "Nora", "Theo"],
+      "chain": [
+        "intervention",
+        "read",
+        "invitation",
+        "depart",
+        "arrive",
+        "attend"
+      ],
+      "costs": ["afternoon-route", "quiet-afternoon", "sister-flowers"]
+    }
+  ],
+  "counterExamples": [
+    { "scenario": 0, "choices": [], "expectedWin": false },
+    { "scenario": 1, "choices": [], "expectedWin": false },
+    { "scenario": 2, "choices": [], "expectedWin": false },
+    {
+      "scenario": 1,
+      "choices": ["exhibit", "repair"],
+      "expectedWin": false,
+      "cost": "An accepted repair takes precedence over the exhibit"
+    },
+    {
+      "scenario": 2,
+      "choices": ["nothing", "gathering-park"],
+      "expectedWin": false
+    },
+    { "scenario": 2, "choices": ["gathering-hall"], "expectedWin": false }
+  ]
+}
