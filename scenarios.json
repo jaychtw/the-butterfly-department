@@ -4,7 +4,7 @@
     "rainDays": [0, 2],
     "interactionTime": "07:45"
   },
-  "initialConditions": "src/core.js initial(); version 1; fixed identities, graph, facts, energy and Friday conflicts",
+  "initialConditions": "src/core.js initial(); schema 2; fixed identities, graph, facts, energy and Friday conflicts",
   "witnesses": [
     {
       "scenario": 0,
