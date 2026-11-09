@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-11-09T15:15:00.972214+00:00",
+  "url": "https://jaychtw.github.io/the-butterfly-department/",
+  "commit": "86eee1a8689bf87c678ec4081d55810033b90c44",
+  "identity": {
+    "commit": "86eee1a8689bf87c678ec4081d55810033b90c44",
+    "version": "1.0.1"
+  },
+  "files": [
+    {
+      "path": "assets/approved/ARTWORK-MANIFEST.json",
+      "sha256": "fd3868313a0627ae7d9eda3eddad34ce5f47f8b8830ad9045d9a2ef332c982ac",
+      "status": 200
+    },
+    {
+      "path": "assets/approved/cover-master.png",
+      "sha256": "52959c6c95ed6051791a42b746b1d71de58bce39e2cda138ce1097334c108411",
+      "status": 200
+    },
+    {
+      "path": "assets/approved/possibility-cover.webp",
+      "sha256": "d06a8435202b49657c834cad058df488bf297efafb3fa64f15d62fd352052c95",
+      "status": 200
+    },
+    {
+      "path": "assets/approved/title-1920x1080.png",
+      "sha256": "55922480d699f12006d4aafbedd9301b3a814fbdc56f5d26fa3be4e2ded9c39a",
+      "status": 200
+    },
+    {
+      "path": "build.json",
+      "sha256": "1bc9fbfb2f5958dedc026a72fe163c1fed6d843d0d6dfc806259e26d1f915fbf",
+      "status": 200
+    },
+    {
+      "path": "index.html",
+      "sha256": "12cb0e0842ab59a340254c318553429a66d78b6551f9994fb5fb71e0d10cb1c0",
+      "status": 200
+    },
+    {
+      "path": "src/app.js",
+      "sha256": "379ef369caefa35ff4755e192bee8f1f98a5fbb4c420b6471356e142ede275ef",
+      "status": 200
+    },
+    {
+      "path": "src/core.js",
+      "sha256": "009b9ea49ebff78740e46cd91db915b78a78e2665cad4712ae2179a399aaf77f",
+      "status": 200
+    },
+    {
+      "path": "src/i18n.js",
+      "sha256": "5912e8d5740c22c89d7949e9e53f72766bf4b27b4819ca330e62b4393113ffb8",
+      "status": 200
+    },
+    {
+      "path": "src/map.js",
+      "sha256": "983d0131fe3a3c5df711a17ade1f16e0f0852e9cf440bfdc0c9cb9e7800c48c7",
+      "status": 200
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "3e8257dc2ec5ba0d68bb5a8540ceff48c8ea9041a0d544264ef114e975d995f6",
+      "status": 200
+    }
+  ],
+  "browser": [
+    "TLS verification enabled with inherited proxy and trusted NSS CA store",
+    "real START",
+    "ordinary repair intervention and completed repair",
+    "causal archive with actual input links",
+    "ordinary delayed departure produces a real missed private appointment"
+  ],
+  "limitations": [
+    "Chromium desktop only for this independent live check; comprehensive local touch and failure checks recorded separately"
+  ]
+}
