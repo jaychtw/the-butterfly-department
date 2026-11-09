@@ -19,6 +19,7 @@ def day(page,action='nothing',capture=None):
   for i in range(100):
    if any(e['type']=='conversation' and e['day']==1 for e in current(page)['events']):break
    button(page,'skip').click()
+  check('live encounter metrics match engine', 'Positive conversations: 1' in page.locator('.metrics').inner_text())
   page.screenshot(path=str(OUT/capture))
  button(page,'finish').click()
 

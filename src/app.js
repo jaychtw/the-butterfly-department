@@ -100,7 +100,7 @@ function render() {
     `${title ? `<main class="title-screen"><img class="title-art" src="./assets/approved/cover-master.png" alt="${lang === "en" ? "Approved illustration of Bellwether, with the title The Butterfly Department" : "鐘風鎮原創插畫，內含 The Butterfly Department 標題"}"><div class="start-plate"><p>${t.department}</p>${btn(t.start, "start", 'class="start"')}<span>${t.welcome}</span></div><div class="title-footer">${t.privacy}</div></main>` : s ? `<div class="game"><header><div><p class="eyebrow">${t.desk}</p><h1>${t.assignments[s.scenario]}</h1></div><div class="date"><b>${t.days[s.day]}</b> <time>${clock(s.tick)}</time><small>${t[s.phase === "observe" ? "observe" : s.phase]}</small></div>${btn("☰ " + t.settings, "menu")}</header><main class="workspace"><section class="map-panel" aria-label="${t.travel}"><div class="map-toolbar">${btn("−", "zoom-out", `aria-label="${t.zoom} −"`)}${btn("+", "zoom-in", `aria-label="${t.zoom} +"`)}${btn("←", "pan-left", `aria-label="${t.pan} ←"`)}${btn("→", "pan-right", `aria-label="${t.pan} →"`)}${btn("↑", "pan-up", `aria-label="${t.pan} ↑"`)}${btn("↓", "pan-down", `aria-label="${t.pan} ↓"`)}${btn("↺", "view", `aria-label="${t.resetView}"`)}</div><div class="map-frame">${mapSVG(t)}</div><div class="map-caption">${t.rain} · ${t.travel}</div><div class="resident-strip">${IDS.map((id) => `<button data-action="resident" data-id="${id}"><svg viewBox="-22 -45 44 65" aria-hidden="true">${portrait(id)}</svg><span>${t.names[id]}</span></button>`).join("")}</div></section><aside class="desk"><p class="eyebrow">${t.objective}</p><p class="goal">${t.goals[s.scenario]}</p>${metric(s)}<div id="phase"></div><div class="desk-tools">${btn(t.archive, "archive")}${btn(t.rewind, "rewind")}</div><div id="recent" aria-live="off"></div></aside></main><footer class="transport">${btn(paused ? t.play : t.pause, "play", s.phase !== "observe" || current().sealed ? "disabled" : "")}${btn("1×", "speed1", `aria-pressed="${speed === 1}"`)}${btn("4×", "speed4", `aria-pressed="${speed === 4}"`)}${btn(t.skip, "skip", s.phase !== "observe" || current().sealed ? "disabled" : "")}${btn(t.finishDay, "finish", s.phase !== "observe" || current().sealed ? "disabled" : "")}<span>${t.pauseNote}</span></footer></div>` : picker()}${globals()}${error ? `<div class="warning" role="alert">${esc(t[error])}${damaged ? btn(t.downloadRaw, "raw") + btn(t.reset, "reset") : ""}</div>` : ""}<div id="modal-root"></div>`;
   if (!title && s) {
     renderPhase();
-    drawMap();
+    drawMap(true);
     recent();
   }
   if (modal) renderModal();
@@ -181,7 +181,7 @@ function position(a) {
     q = POS[a.edge.to];
   return [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
 }
-function drawMap() {
+function drawMap(instant = false) {
   const s = state();
   if (!$("#actors") || !s) return;
   const t = tr();
@@ -198,7 +198,7 @@ function drawMap() {
         `${t.names[id]} · ${a.node ? t.nodes[a.node] : t.move}`,
       );
       element.classList.toggle("walking", !!a.edge);
-      element.style.transitionDuration = `${0.42 / speed}s`;
+      element.style.transitionDuration = instant ? "0s" : `${0.42 / speed}s`;
       return;
     }
     $("#actors").insertAdjacentHTML(
@@ -259,7 +259,8 @@ function step(mode) {
   else {
     const d = $("time");
     if (d) d.textContent = clock(s.tick);
-    drawMap();
+    drawMap(mode !== "one");
+    $(".metrics").outerHTML = metric(s);
     recent();
   }
 }
